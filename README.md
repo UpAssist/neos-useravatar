@@ -47,6 +47,21 @@ The browser of the editor then loads the photo from gravatar.com, so Gravatar (A
 the editor's IP address and the hash of the e-mail address. Decide whether that is acceptable
 for your editors before you enable it.
 
+### Who can set a photo
+
+Every logged-in backend user, whatever their role: the package grants its privilege target
+`UpAssist.Neos.UserAvatar:Own` to `Neos.Flow:AuthenticatedUser`. To take it away from a role, deny
+it in your own `Policy.yaml` (a DENY wins over the grant):
+
+```yaml
+roles:
+  'Your.Package:SomeRole':
+    privileges:
+      -
+        privilegeTarget: 'UpAssist.Neos.UserAvatar:Own'
+        permission: DENY
+```
+
 ## How it works
 
 - Uploads are JPEG or PNG (GIF and WebP can hold many frames), at most 10 MB and 40 megapixels.
@@ -70,8 +85,10 @@ for your editors before you enable it.
   `PrimaryToolbar/Right/UserDropDown` in Neos 8). The Neos component stays in place, so logout,
   user settings and "restore user" keep working. In the backend modules a small script does the
   same for the Fluid user menu.
-- The privileges are granted to `Neos.Neos:AbstractEditor`, so every backend user can set their
-  own photo.
+- The privileges are granted to `Neos.Flow:AuthenticatedUser`, so every logged-in backend user
+  can set their own photo, also with a custom role that does not extend
+  `Neos.Neos:AbstractEditor`. The block shows on User Settings, so only for roles that may open
+  that page.
 
 ## Development
 

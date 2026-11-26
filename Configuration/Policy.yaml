@@ -5,7 +5,10 @@ privilegeTargets:
       matcher: 'method(UpAssist\Neos\UserAvatar\Controller\AvatarController->(show|settings|upload|remove)Action())'
 
 roles:
-  'Neos.Neos:AbstractEditor':
+  # Every logged-in backend user, also with a custom role that does not extend
+  # Neos.Neos:AbstractEditor: the actions only touch the current user's own photo, and the
+  # controller is only reachable through the Neos backend authentication provider.
+  'Neos.Flow:AuthenticatedUser':
     privileges:
       -
         privilegeTarget: 'UpAssist.Neos.UserAvatar:Own'
