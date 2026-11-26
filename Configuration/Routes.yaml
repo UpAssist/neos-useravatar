@@ -7,3 +7,33 @@
     '@action': 'show'
     '@format': 'html'
   httpMethods: ['GET']
+
+-
+  name: 'UpAssist.Neos.UserAvatar: photo settings of the current backend user'
+  uriPattern: 'neos/user-avatar/settings'
+  defaults:
+    '@package': 'UpAssist.Neos.UserAvatar'
+    '@controller': 'Avatar'
+    '@action': 'settings'
+    '@format': 'json'
+  httpMethods: ['GET']
+
+-
+  name: 'UpAssist.Neos.UserAvatar: upload the photo'
+  uriPattern: 'neos/user-avatar/upload'
+  defaults:
+    '@package': 'UpAssist.Neos.UserAvatar'
+    '@controller': 'Avatar'
+    '@action': 'upload'
+    '@format': 'html'
+  httpMethods: ['POST']
+
+-
+  name: 'UpAssist.Neos.UserAvatar: remove the photo'
+  uriPattern: 'neos/user-avatar/remove'
+  defaults:
+    '@package': 'UpAssist.Neos.UserAvatar'
+    '@controller': 'Avatar'
+    '@action': 'remove'
+    '@format': 'html'
+  httpMethods: ['POST']

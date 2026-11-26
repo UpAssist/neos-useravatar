@@ -4,7 +4,7 @@ A profile photo for Neos backend users. The photo replaces the initials (Neos 9,
 at the bottom left) or the user icon (Neos 8, top right) in the user menu of the Neos UI and of
 the backend modules.
 
-- Every editor uploads their own photo in **User > Profile photo**.
+- Every editor uploads their own photo on the **User Settings** page, in a "Profile photo" block.
 - Optionally, users without an uploaded photo get their [Gravatar](https://gravatar.com).
 - Without a photo, Neos shows the initials or icon as before.
 
@@ -57,7 +57,13 @@ for your editors before you enable it.
   only serves or deletes a resource from its own collection whose file name carries that user's
   identifier.
 - `GET /neos/user-avatar` answers for the logged-in backend user: a redirect to the uploaded
-  photo, else to Gravatar (when enabled), else 404.
+  photo, else to Gravatar (when enabled), else 404. `GET /neos/user-avatar/settings` gives the
+  data for the photo block as JSON; `POST /neos/user-avatar/upload` and `/remove` change the
+  photo (CSRF token required) and return to User Settings.
+- The photo block on User Settings is added by the script that every backend module loads
+  (`Neos.Neos.moduleConfiguration.additionalResources`). Its controls belong to a form of their
+  own outside the Neos user form, so the Neos template is not overridden and "Save User" works
+  as before.
 - In the Neos UI, a plugin wraps the user menu container (`Drawer/Bottom/UserDropDown` in Neos 9,
   `PrimaryToolbar/Right/UserDropDown` in Neos 8). The Neos component stays in place, so logout,
   user settings and "restore user" keep working. In the backend modules a small script does the

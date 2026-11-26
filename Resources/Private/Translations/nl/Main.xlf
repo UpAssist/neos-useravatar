@@ -2,51 +2,39 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 	<file original="" product-name="UpAssist.Neos.UserAvatar" source-language="en" target-language="nl" datatype="plaintext">
 		<body>
-			<trans-unit id="module.label" xml:space="preserve">
+			<trans-unit id="heading" xml:space="preserve">
 				<source>Profile photo</source>
 				<target>Profielfoto</target>
 			</trans-unit>
-			<trans-unit id="module.description" xml:space="preserve">
-				<source>Upload or remove the photo that Neos shows for your user.</source>
-				<target>Upload of verwijder de foto die Neos bij je gebruiker toont.</target>
+			<trans-unit id="none" xml:space="preserve">
+				<source>You have no profile photo yet.</source>
+				<target>Je hebt nog geen profielfoto.</target>
 			</trans-unit>
-			<trans-unit id="module.heading" xml:space="preserve">
-				<source>Profile photo</source>
-				<target>Profielfoto</target>
-			</trans-unit>
-			<trans-unit id="module.none" xml:space="preserve">
-				<source>You have no profile photo yet. Neos shows your initials.</source>
-				<target>Je hebt nog geen profielfoto. Neos toont je initialen.</target>
-			</trans-unit>
-			<trans-unit id="module.gravatarActive" xml:space="preserve">
-				<source>This photo comes from Gravatar.</source>
-				<target>Deze foto komt van Gravatar.</target>
-			</trans-unit>
-			<trans-unit id="module.upload" xml:space="preserve">
+			<trans-unit id="upload" xml:space="preserve">
 				<source>Upload a photo</source>
 				<target>Upload een foto</target>
 			</trans-unit>
-			<trans-unit id="module.uploadHelp" xml:space="preserve">
+			<trans-unit id="uploadHelp" xml:space="preserve">
 				<source>JPEG or PNG. The photo is cropped to a square from the centre.</source>
 				<target>JPEG of PNG. De foto wordt vanuit het midden vierkant bijgesneden.</target>
 			</trans-unit>
-			<trans-unit id="module.save" xml:space="preserve">
+			<trans-unit id="save" xml:space="preserve">
 				<source>Save photo</source>
 				<target>Foto opslaan</target>
 			</trans-unit>
-			<trans-unit id="module.remove" xml:space="preserve">
+			<trans-unit id="remove" xml:space="preserve">
 				<source>Remove photo</source>
 				<target>Foto verwijderen</target>
 			</trans-unit>
-			<trans-unit id="module.gravatarHelp" xml:space="preserve">
+			<trans-unit id="gravatarHelp" xml:space="preserve">
 				<source>Without an uploaded photo, Neos uses the Gravatar of {0}.</source>
 				<target>Zonder geüploade foto gebruikt Neos de Gravatar van {0}.</target>
 			</trans-unit>
-			<trans-unit id="module.gravatarNoEmail" xml:space="preserve">
+			<trans-unit id="gravatarNoEmail" xml:space="preserve">
 				<source>Gravatar is enabled, but your user has no e-mail address.</source>
 				<target>Gravatar staat aan, maar je gebruiker heeft geen e-mailadres.</target>
 			</trans-unit>
-			<trans-unit id="message.noFile" xml:space="preserve">
+			<trans-unit id="message.nofile" xml:space="preserve">
 				<source>Choose a photo first.</source>
 				<target>Kies eerst een foto.</target>
 			</trans-unit>
@@ -54,7 +42,7 @@
 				<source>Your profile photo is saved.</source>
 				<target>Je profielfoto is opgeslagen.</target>
 			</trans-unit>
-			<trans-unit id="message.invalidFile" xml:space="preserve">
+			<trans-unit id="message.invalid" xml:space="preserve">
 				<source>This file cannot be used as a photo. Use a JPEG or PNG image.</source>
 				<target>Dit bestand kan niet als foto worden gebruikt. Gebruik een JPEG- of PNG-afbeelding.</target>
 			</trans-unit>

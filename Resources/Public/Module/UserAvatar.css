@@ -17,18 +17,32 @@
     content: none;
 }
 
-/* The photo in the profile photo module itself. */
-.upassist-useravatar-module__photo {
-    display: block;
-    width: 128px;
-    height: 128px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 1em 0;
+/* The "Profile photo" block on the User Settings page. */
+.upassist-useravatar__current {
+    margin: 0 0 1em;
 }
 
-/* The Neos module styles reset the margin of forms. */
-.upassist-useravatar-module .upassist-useravatar-module__form {
+.upassist-useravatar__photo {
     display: block;
-    margin-top: 1.5em !important;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.upassist-useravatar__buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 1em;
+}
+
+.upassist-useravatar__message {
+    margin: 0 0 1em;
+    padding: 8px 12px;
+    background: #00a338;
+    color: #fff;
+}
+
+.upassist-useravatar__message--error {
+    background: #ff460d;
 }

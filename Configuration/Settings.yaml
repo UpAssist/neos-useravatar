@@ -37,17 +37,8 @@ Neos:
                   controllerObjectNamePattern: 'UpAssist\Neos\UserAvatar\Controller\.*'
 
   Neos:
-    modules:
-      user:
-        submodules:
-          avatar:
-            label: 'UpAssist.Neos.UserAvatar:Main:module.label'
-            controller: \UpAssist\Neos\UserAvatar\Controller\Module\UserAvatarController
-            description: 'UpAssist.Neos.UserAvatar:Main:module.description'
-            icon: fas fa-user-circle
-            mainStylesheet: 'Lite'
-
-    # Backend modules (Fluid): replace the initials (Neos 9) or user icon (Neos 8) in the user menu.
+    # Backend modules (Fluid): replace the initials (Neos 9) or user icon (Neos 8) in the user menu,
+    # and add the photo block to the User Settings page.
     moduleConfiguration:
       additionalResources:
         styleSheets:
