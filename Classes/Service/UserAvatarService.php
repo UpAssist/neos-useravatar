@@ -30,6 +30,12 @@ class UserAvatarService
 
     public const ALLOWED_MEDIA_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
+    /** The resource collection that holds only avatar photos (see Settings.yaml). */
+    public const COLLECTION = 'upassistUserAvatar';
+
+    /** Uploads with more pixels than this are refused before they are decoded. */
+    private const MAXIMUM_PIXELS = 40_000_000;
+
     #[Flow\Inject]
     protected UserService $userService;
 
@@ -64,7 +70,17 @@ class UserAvatarService
         }
         $resource = $this->persistenceManager->getObjectByIdentifier($identifier, PersistentResource::class);
 
-        return $resource instanceof PersistentResource ? $resource : null;
+        // The preference value is not trusted: a user can set preferences through the Neos API.
+        // Only a photo that this package stored for this very user is served or deleted.
+        if (
+            !$resource instanceof PersistentResource
+            || $resource->getCollectionName() !== self::COLLECTION
+            || pathinfo($resource->getFilename(), PATHINFO_FILENAME) !== $this->filenameFor($user)
+        ) {
+            return null;
+        }
+
+        return $resource;
     }
 
     /**
@@ -143,7 +159,11 @@ class UserAvatarService
             $this->resourceManager->deleteResource($upload);
         }
 
-        $resource = $this->resourceManager->importResourceFromContent($content, 'avatar.' . $this->extensionFor($upload->getMediaType()));
+        $resource = $this->resourceManager->importResourceFromContent(
+            $content,
+            $this->filenameFor($user) . '.' . $this->extensionFor($upload->getMediaType()),
+            self::COLLECTION
+        );
         $previous = $this->getUploadedAvatar($user);
         $this->preferencesOf($user)->set(self::PREFERENCE_KEY, $this->persistenceManager->getIdentifierByObject($resource));
         $this->userService->updateUser($user);
@@ -170,6 +190,19 @@ class UserAvatarService
         if ($upload->getFileSize() > $this->maximumUploadSize) {
             throw new \InvalidArgumentException('The file is too large.', 1795680002);
         }
+        // Refuse decompression bombs before Imagine decodes the whole image.
+        $size = @getimagesize($upload->createTemporaryLocalCopy());
+        if ($size === false || $size[0] < 1 || $size[1] < 1) {
+            throw new \InvalidArgumentException('The uploaded file is not a readable image.', 1795680005);
+        }
+        if ($size[0] * $size[1] > self::MAXIMUM_PIXELS) {
+            throw new \InvalidArgumentException('The image has too many pixels.', 1795680006);
+        }
+    }
+
+    private function filenameFor(User $user): string
+    {
+        return 'avatar-' . $this->persistenceManager->getIdentifierByObject($user);
     }
 
     private function makeSquare(PersistentResource $upload): string

@@ -16,6 +16,12 @@ UpAssist:
 
 Neos:
   Flow:
+    resource:
+      collections:
+        # Holds only the avatar photos, so a stored identifier can be checked before it is used.
+        upassistUserAvatar:
+          storage: 'defaultPersistentResourcesStorage'
+          target: 'localWebDirectoryPersistentResourcesTarget'
     mvc:
       routes:
         'UpAssist.Neos.UserAvatar':

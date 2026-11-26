@@ -27,6 +27,8 @@
     margin: 1em 0;
 }
 
-.upassist-useravatar-module__form {
-    margin-top: 1.5em;
+/* The Neos module styles reset the margin of forms. */
+.upassist-useravatar-module .upassist-useravatar-module__form {
+    display: block;
+    margin-top: 1.5em !important;
 }

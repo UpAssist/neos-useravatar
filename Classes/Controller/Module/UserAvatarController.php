@@ -38,6 +38,7 @@ class UserAvatarController extends AbstractModuleController
 
     public function uploadAction(?PersistentResource $avatar = null): void
     {
+        $this->assertPost();
         $user = $this->userAvatarService->getCurrentUser();
         if ($user === null || $avatar === null) {
             $this->addFlashMessage($this->translate('message.noFile'), '', Message::SEVERITY_WARNING);
@@ -54,12 +55,23 @@ class UserAvatarController extends AbstractModuleController
 
     public function removeAction(): void
     {
+        $this->assertPost();
         $user = $this->userAvatarService->getCurrentUser();
         if ($user !== null) {
             $this->userAvatarService->removeAvatar($user);
             $this->addFlashMessage($this->translate('message.removed'));
         }
         $this->redirect('index');
+    }
+
+    /**
+     * Flow checks the CSRF token only on POST, so actions that change anything accept nothing else.
+     */
+    private function assertPost(): void
+    {
+        if ($this->request->getHttpRequest()->getMethod() !== 'POST') {
+            $this->throwStatus(405);
+        }
     }
 
     private function translate(string $id): string
