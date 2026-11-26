@@ -39,8 +39,9 @@ UpAssist:
 ### Gravatar
 
 Gravatar is off by default. With `gravatar.enabled: true`, a user without an uploaded photo gets
-the Gravatar of their primary e-mail address, or of their account name when that is an e-mail
-address. The hash is SHA-256.
+the Gravatar of an e-mail address of their user, in this order: the primary electronic address
+(when it is an e-mail address), the first other e-mail address, the account name (when it is an
+e-mail address). The hash is SHA-256.
 
 The browser of the editor then loads the photo from gravatar.com, so Gravatar (Automattic) sees
 the editor's IP address and the hash of the e-mail address. Decide whether that is acceptable
@@ -59,7 +60,8 @@ for your editors before you enable it.
 - `GET /neos/user-avatar` answers for the logged-in backend user: a redirect to the uploaded
   photo, else to Gravatar (when enabled), else 404. `GET /neos/user-avatar/settings` gives the
   data for the photo block as JSON; `POST /neos/user-avatar/upload` and `/remove` change the
-  photo (CSRF token required) and return to User Settings.
+  photo (CSRF token required) and return to User Settings, where Neos shows the result as a
+  flash message.
 - The photo block on User Settings is added by the script that every backend module loads
   (`Neos.Neos.moduleConfiguration.additionalResources`). Its controls belong to a form of their
   own outside the Neos user form, so the Neos template is not overridden and "Save User" works

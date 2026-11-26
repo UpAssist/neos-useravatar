@@ -8,7 +8,6 @@
 
     var BASE_URI = '/neos/user-avatar';
     var FORM_ID = 'upassist-useravatar-form';
-    var STATUS_PARAMETER = 'upassist-useravatar';
 
     function element(tag, attributes, children) {
         var node = document.createElement(tag);
@@ -40,35 +39,6 @@
 
     function isUserSettingsPage() {
         return /\/user\/usersettings(\/|$)/.test(window.location.pathname) && document.querySelector('form.user-edit') !== null;
-    }
-
-    function withoutStatus(uri) {
-        var url = new URL(uri, window.location.href);
-        url.searchParams.delete(STATUS_PARAMETER);
-        return url.pathname + url.search + url.hash;
-    }
-
-    function statusMessage(labels) {
-        var status = new URLSearchParams(window.location.search).get(STATUS_PARAMETER);
-        if (!status) {
-            return null;
-        }
-        // Show the message once: a reload or a save of the Neos form must not show it again.
-        window.history.replaceState(null, '', withoutStatus(window.location.href));
-        Array.prototype.forEach.call(document.forms, function (form) {
-            if (form.getAttribute('action') && form.getAttribute('action').indexOf(STATUS_PARAMETER) !== -1) {
-                form.setAttribute('action', withoutStatus(form.getAttribute('action')));
-            }
-        });
-        if (!labels['message.' + status]) {
-            return null;
-        }
-        var isError = status === 'invalid' || status === 'nofile';
-        return element('p', {
-            'class': 'upassist-useravatar__message' + (isError ? ' upassist-useravatar__message--error' : ''),
-            role: 'status',
-            text: labels['message.' + status]
-        });
     }
 
     function buildBlock(settings, csrfToken) {
@@ -108,7 +78,6 @@
 
         var fieldset = element('fieldset', {'class': 'neos-span11 upassist-useravatar'}, [
             element('legend', {text: labels.heading}),
-            statusMessage(labels),
             element('div', {'class': 'upassist-useravatar__current'}, [photo, none]),
             element('div', {'class': 'neos-control-group'}, [
                 element('label', {'class': 'neos-control-label', 'for': 'upassist-useravatar-file', text: labels.upload}),

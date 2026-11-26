@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UpAssist\Neos\UserAvatar\Controller;
 
 use GuzzleHttp\Psr7\Uri;
+use Neos\Error\Messages\Message;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Locale;
 use Neos\Flow\I18n\Translator;
@@ -25,7 +26,6 @@ class AvatarController extends ActionController
 {
     private const LABELS = [
         'heading', 'none', 'upload', 'uploadHelp', 'save', 'remove',
-        'message.nofile', 'message.saved', 'message.invalid', 'message.removed',
     ];
 
     /**
@@ -119,11 +119,21 @@ class AvatarController extends ActionController
         }
     }
 
+    /**
+     * Back to User Settings, with the result as a flash message: Neos shows it there once, as one
+     * of its own notifications. (A query parameter would travel along in every link Neos builds.)
+     */
     private function backToUserSettings(string $status): never
     {
+        $user = $this->userAvatarService->getCurrentUser();
+        $locale = $user === null ? new Locale('en') : $this->localeOf($user);
+        $this->addFlashMessage(
+            $this->translate('message.' . $status, [], $locale),
+            '',
+            in_array($status, ['nofile', 'invalid'], true) ? Message::SEVERITY_ERROR : Message::SEVERITY_OK
+        );
         $uri = $this->uriBuilder
             ->reset()
-            ->setArguments(['upassist-useravatar' => $status])
             ->uriFor('index', ['module' => 'user/usersettings'], 'Backend\Module', 'Neos.Neos');
         $this->redirectToUri($uri, 0, 303);
     }

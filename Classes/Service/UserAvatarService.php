@@ -129,13 +129,24 @@ class UserAvatarService
     }
 
     /**
-     * The primary e-mail address of the user, else the account identifier when it is an e-mail address.
+     * The e-mail address for Gravatar, in this order: the primary electronic address when it is an
+     * e-mail address, the first other e-mail address of the user, the account identifier when it
+     * is an e-mail address.
      */
     public function getEmailAddress(User $user): ?string
     {
-        $primary = $user->getPrimaryElectronicAddress();
-        if ($primary !== null && $primary->getType() === 'Email' && filter_var($primary->getIdentifier(), FILTER_VALIDATE_EMAIL)) {
-            return $primary->getIdentifier();
+        $candidates = [$user->getPrimaryElectronicAddress()];
+        foreach ($user->getElectronicAddresses() as $electronicAddress) {
+            $candidates[] = $electronicAddress;
+        }
+        foreach ($candidates as $electronicAddress) {
+            if (
+                $electronicAddress !== null
+                && $electronicAddress->getType() === 'Email'
+                && filter_var($electronicAddress->getIdentifier(), FILTER_VALIDATE_EMAIL)
+            ) {
+                return $electronicAddress->getIdentifier();
+            }
         }
         foreach ($user->getAccounts() as $account) {
             if (filter_var($account->getAccountIdentifier(), FILTER_VALIDATE_EMAIL)) {

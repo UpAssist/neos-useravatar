@@ -13,6 +13,7 @@ All notable changes to this project are documented in this file. The format is b
   identifier is kept in the user's preferences, so there is no database migration.
 - `/neos/user-avatar`: redirects to the photo of the logged-in backend user, or answers 404;
   `/neos/user-avatar/settings`, `/upload` and `/remove` for the User Settings block.
-- Optional Gravatar fallback (`UpAssist.Neos.UserAvatar.gravatar.enabled`, off by default).
+- Optional Gravatar fallback (`UpAssist.Neos.UserAvatar.gravatar.enabled`, off by default), using
+  the primary e-mail address, else any other e-mail address, else an e-mail account name.
 - The photo replaces the initials (Neos 9) or the user icon (Neos 8) in the user menu of the
   Neos UI and of the backend modules.

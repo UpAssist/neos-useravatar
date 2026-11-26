@@ -35,14 +35,3 @@
     gap: 8px;
     margin-top: 1em;
 }
-
-.upassist-useravatar__message {
-    margin: 0 0 1em;
-    padding: 8px 12px;
-    background: #00a338;
-    color: #fff;
-}
-
-.upassist-useravatar__message--error {
-    background: #ff460d;
-}
