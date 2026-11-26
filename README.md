@@ -18,7 +18,7 @@ the backend modules.
 
 | Version | Neos |
 | --- | --- |
-| unreleased | 8.3, 8.4, 9.0, 9.1, 9.2 |
+| 0.1.x | 8.3, 8.4, 9.0, 9.1, 9.2 |
 
 ## Installation
 
