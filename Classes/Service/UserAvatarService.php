@@ -195,7 +195,8 @@ class UserAvatarService
         }
         // Refuse decompression bombs before Imagine decodes the whole image.
         $size = @getimagesize($upload->createTemporaryLocalCopy());
-        if ($size === false || $size[0] < 1 || $size[1] < 1) {
+        // The media type above comes from the file name; the image type is read from the content.
+        if ($size === false || !in_array($size[2], [IMAGETYPE_JPEG, IMAGETYPE_PNG], true) || $size[0] < 1 || $size[1] < 1) {
             throw new \InvalidArgumentException('The uploaded file is not a readable image.', 1795680005);
         }
         if ($size[0] * $size[1] > self::MAXIMUM_PIXELS) {
