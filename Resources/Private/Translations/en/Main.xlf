@@ -21,7 +21,7 @@
 				<source>Upload a photo</source>
 			</trans-unit>
 			<trans-unit id="module.uploadHelp" xml:space="preserve">
-				<source>JPEG, PNG, GIF or WebP. The photo is cropped to a square from the centre.</source>
+				<source>JPEG or PNG. The photo is cropped to a square from the centre.</source>
 			</trans-unit>
 			<trans-unit id="module.save" xml:space="preserve">
 				<source>Save photo</source>
@@ -42,7 +42,7 @@
 				<source>Your profile photo is saved.</source>
 			</trans-unit>
 			<trans-unit id="message.invalidFile" xml:space="preserve">
-				<source>This file cannot be used as a photo. Use a JPEG, PNG, GIF or WebP image.</source>
+				<source>This file cannot be used as a photo. Use a JPEG or PNG image.</source>
 			</trans-unit>
 			<trans-unit id="message.removed" xml:space="preserve">
 				<source>Your profile photo is removed.</source>

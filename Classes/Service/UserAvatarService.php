@@ -28,7 +28,10 @@ class UserAvatarService
 {
     public const PREFERENCE_KEY = 'UpAssist.Neos.UserAvatar.resource';
 
-    public const ALLOWED_MEDIA_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    /**
+     * JPEG and PNG only: GIF and WebP can hold many frames, which the pixel cap below does not count.
+     */
+    public const ALLOWED_MEDIA_TYPES = ['image/jpeg', 'image/png'];
 
     /** The resource collection that holds only avatar photos (see Settings.yaml). */
     public const COLLECTION = 'upassistUserAvatar';
@@ -234,8 +237,7 @@ class UserAvatarService
 
     private function extensionFor(string $mediaType): string
     {
-        // Transparent formats stay PNG, everything else becomes JPEG.
-        return in_array($mediaType, ['image/png', 'image/gif', 'image/webp'], true) ? 'png' : 'jpg';
+        return $mediaType === 'image/png' ? 'png' : 'jpg';
     }
 
     private function preferencesOf(User $user): UserPreferences

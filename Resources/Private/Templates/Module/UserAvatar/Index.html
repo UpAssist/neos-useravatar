@@ -24,7 +24,7 @@
 			<f:form action="upload" enctype="multipart/form-data" class="upassist-useravatar-module__form">
 				<label for="upassist-useravatar-file">{neos:backend.translate(id: 'module.upload', package: 'UpAssist.Neos.UserAvatar', source: 'Main', value: 'Upload a photo')}</label>
 				<f:form.upload name="avatar" id="upassist-useravatar-file" additionalAttributes="{accept: acceptedTypes, required: 'required'}" />
-				<p class="neos-help-block">{neos:backend.translate(id: 'module.uploadHelp', package: 'UpAssist.Neos.UserAvatar', source: 'Main', value: 'JPEG, PNG, GIF or WebP. The photo is cropped to a square from the centre.')}</p>
+				<p class="neos-help-block">{neos:backend.translate(id: 'module.uploadHelp', package: 'UpAssist.Neos.UserAvatar', source: 'Main', value: 'JPEG or PNG. The photo is cropped to a square from the centre.')}</p>
 				<f:form.submit value="{neos:backend.translate(id: 'module.save', package: 'UpAssist.Neos.UserAvatar', source: 'Main', value: 'Save photo')}" class="neos-button neos-button-primary" />
 			</f:form>
 

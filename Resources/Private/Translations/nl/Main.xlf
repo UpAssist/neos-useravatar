@@ -27,8 +27,8 @@
 				<target>Upload een foto</target>
 			</trans-unit>
 			<trans-unit id="module.uploadHelp" xml:space="preserve">
-				<source>JPEG, PNG, GIF or WebP. The photo is cropped to a square from the centre.</source>
-				<target>JPEG, PNG, GIF of WebP. De foto wordt vanuit het midden vierkant bijgesneden.</target>
+				<source>JPEG or PNG. The photo is cropped to a square from the centre.</source>
+				<target>JPEG of PNG. De foto wordt vanuit het midden vierkant bijgesneden.</target>
 			</trans-unit>
 			<trans-unit id="module.save" xml:space="preserve">
 				<source>Save photo</source>
@@ -55,8 +55,8 @@
 				<target>Je profielfoto is opgeslagen.</target>
 			</trans-unit>
 			<trans-unit id="message.invalidFile" xml:space="preserve">
-				<source>This file cannot be used as a photo. Use a JPEG, PNG, GIF or WebP image.</source>
-				<target>Dit bestand kan niet als foto worden gebruikt. Gebruik een JPEG-, PNG-, GIF- of WebP-afbeelding.</target>
+				<source>This file cannot be used as a photo. Use a JPEG or PNG image.</source>
+				<target>Dit bestand kan niet als foto worden gebruikt. Gebruik een JPEG- of PNG-afbeelding.</target>
 			</trans-unit>
 			<trans-unit id="message.removed" xml:space="preserve">
 				<source>Your profile photo is removed.</source>

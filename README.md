@@ -48,10 +48,14 @@ for your editors before you enable it.
 
 ## How it works
 
+- Uploads are JPEG or PNG (GIF and WebP can hold many frames), at most 10 MB and 40 megapixels.
 - The uploaded photo is cropped to a square from the centre, rotated by its EXIF orientation and
-  stored as a Flow resource in the `persistent` collection. It is not a Media asset, so it does
+  stored as a Flow resource in its own collection, `upassistUserAvatar` (same storage and target
+  as `persistent`). It is not a Media asset, so it does
   not show up in the Media module. Its identifier is stored in the user's preferences
-  (`UpAssist.Neos.UserAvatar.resource`).
+  (`UpAssist.Neos.UserAvatar.resource`). Because users can set their own preferences, the package
+  only serves or deletes a resource from its own collection whose file name carries that user's
+  identifier.
 - `GET /neos/user-avatar` answers for the logged-in backend user: a redirect to the uploaded
   photo, else to Gravatar (when enabled), else 404.
 - In the Neos UI, a plugin wraps the user menu container (`Drawer/Bottom/UserDropDown` in Neos 9,
