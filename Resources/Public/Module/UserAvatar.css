@@ -1,0 +1,32 @@
+/* Neos 9: the initials; Neos 8: the user icon (an <i>, or an <svg> once Font Awesome replaced it). */
+.upassist-useravatar--loaded .neos-user-image,
+.upassist-useravatar--loaded .neos-dropdown-toggle > .fa-user {
+    background: var(--upassist-useravatar-image) center / cover no-repeat !important;
+    color: transparent !important;
+    border-radius: 50%;
+}
+
+.upassist-useravatar--loaded .neos-dropdown-toggle > .fa-user {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.upassist-useravatar--loaded .neos-dropdown-toggle > .fa-user::before {
+    content: none;
+}
+
+/* The photo in the profile photo module itself. */
+.upassist-useravatar-module__photo {
+    display: block;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1em 0;
+}
+
+.upassist-useravatar-module__form {
+    margin-top: 1.5em;
+}

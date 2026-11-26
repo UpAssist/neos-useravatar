@@ -1,0 +1,26 @@
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'UpAssist.Neos.UserAvatar:Show':
+      label: 'See your own profile photo'
+      matcher: 'method(UpAssist\Neos\UserAvatar\Controller\AvatarController->showAction())'
+    'UpAssist.Neos.UserAvatar:ModuleActions':
+      label: 'Upload or remove your own profile photo'
+      matcher: 'method(UpAssist\Neos\UserAvatar\Controller\Module\UserAvatarController->(index|upload|remove)Action())'
+
+  'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
+    'UpAssist.Neos.UserAvatar:Module':
+      label: 'Access to the profile photo module'
+      matcher: 'user/avatar'
+
+roles:
+  'Neos.Neos:AbstractEditor':
+    privileges:
+      -
+        privilegeTarget: 'UpAssist.Neos.UserAvatar:Show'
+        permission: GRANT
+      -
+        privilegeTarget: 'UpAssist.Neos.UserAvatar:ModuleActions'
+        permission: GRANT
+      -
+        privilegeTarget: 'UpAssist.Neos.UserAvatar:Module'
+        permission: GRANT

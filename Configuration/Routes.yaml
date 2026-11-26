@@ -1,0 +1,9 @@
+-
+  name: 'UpAssist.Neos.UserAvatar: photo of the current backend user'
+  uriPattern: 'neos/user-avatar'
+  defaults:
+    '@package': 'UpAssist.Neos.UserAvatar'
+    '@controller': 'Avatar'
+    '@action': 'show'
+    '@format': 'html'
+  httpMethods: ['GET']

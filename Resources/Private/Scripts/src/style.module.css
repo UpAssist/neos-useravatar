@@ -1,0 +1,18 @@
+/* The wrapper must not change the layout of the drawer or top bar. */
+.wrapper,
+.withPhoto {
+    display: contents;
+}
+
+/* The first child of the menu button: the initials (Neos 9) or the user icon (Neos 8). */
+.withPhoto [role="button"] > :first-child {
+    background: var(--upassist-useravatar-image) center / cover no-repeat;
+    color: transparent !important;
+    border-radius: 50%;
+}
+
+.withPhoto [role="button"] > svg:first-child {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}

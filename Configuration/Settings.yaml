@@ -1,0 +1,63 @@
+UpAssist:
+  Neos:
+    UserAvatar:
+      # Width and height in pixels of the stored photo and of the Gravatar request.
+      size: 256
+      # Largest accepted upload, in bytes (10 MB).
+      maximumUploadSize: 10485760
+      gravatar:
+        # Off by default: the browser of every editor then loads the photo from gravatar.com,
+        # which sees the editor's IP address and the SHA-256 hash of the e-mail address.
+        enabled: false
+        # What Gravatar returns when it has no photo. '404' keeps the Neos initials or icon;
+        # 'mp', 'identicon', 'retro' etc. show a Gravatar placeholder instead.
+        default: '404'
+        rating: 'g'
+
+Neos:
+  Flow:
+    mvc:
+      routes:
+        'UpAssist.Neos.UserAvatar':
+          position: 'before Neos.Neos'
+    security:
+      authentication:
+        providers:
+          'Neos.Neos:Backend':
+            requestPatterns:
+              'UpAssist.Neos.UserAvatar:Controllers':
+                pattern: 'ControllerObjectName'
+                patternOptions:
+                  controllerObjectNamePattern: 'UpAssist\Neos\UserAvatar\Controller\.*'
+
+  Neos:
+    modules:
+      user:
+        submodules:
+          avatar:
+            label: 'UpAssist.Neos.UserAvatar:Main:module.label'
+            controller: \UpAssist\Neos\UserAvatar\Controller\Module\UserAvatarController
+            description: 'UpAssist.Neos.UserAvatar:Main:module.description'
+            icon: fas fa-user-circle
+            mainStylesheet: 'Lite'
+
+    # Backend modules (Fluid): replace the initials (Neos 9) or user icon (Neos 8) in the user menu.
+    moduleConfiguration:
+      additionalResources:
+        styleSheets:
+          'UpAssist.Neos.UserAvatar:Module': 'resource://UpAssist.Neos.UserAvatar/Public/Module/UserAvatar.css'
+        javaScripts:
+          'UpAssist.Neos.UserAvatar:Module': 'resource://UpAssist.Neos.UserAvatar/Public/Module/UserAvatar.js'
+
+    Ui:
+      # Content UI (React): the same, through a UI plugin.
+      resources:
+        javascript:
+          'UpAssist.Neos.UserAvatar:Plugin':
+            resource: 'resource://UpAssist.Neos.UserAvatar/Public/Plugin/Plugin.js'
+        stylesheets:
+          'UpAssist.Neos.UserAvatar:Plugin':
+            resource: 'resource://UpAssist.Neos.UserAvatar/Public/Plugin/Plugin.css'
+      frontendConfiguration:
+        'UpAssist.Neos.UserAvatar':
+          uri: '/neos/user-avatar'
