@@ -5,9 +5,10 @@ privilegeTargets:
       matcher: 'method(UpAssist\Neos\UserAvatar\Controller\AvatarController->(show|settings|upload|remove)Action())'
 
 roles:
-  # Every logged-in backend user, also with a custom role that does not extend
-  # Neos.Neos:AbstractEditor: the actions only touch the current user's own photo, and the
-  # controller is only reachable through the Neos backend authentication provider.
+  # Every authenticated user, so custom backend roles that do not extend Neos.Neos:AbstractEditor
+  # get it too. The controller only acts for an account of the 'Neos.Neos:Backend' provider
+  # (UserAvatarService::getCurrentUser()), and only on that user's own photo: an account of
+  # another provider, such as a frontend login, gets 404 or 403.
   'Neos.Flow:AuthenticatedUser':
     privileges:
       -

@@ -15,6 +15,8 @@ All notable changes to this project are documented in this file. The format is b
   `/neos/user-avatar/settings`, `/upload` and `/remove` for the User Settings block.
 - Every logged-in backend user can set a photo, also with a custom role that does not extend
   `Neos.Neos:AbstractEditor` (privilege target `UpAssist.Neos.UserAvatar:Own`, deny it per role).
+  Only accounts of the `Neos.Neos:Backend` provider get a photo.
+- README with screenshots and a permissions section.
 - Optional Gravatar fallback (`UpAssist.Neos.UserAvatar.gravatar.enabled`, off by default), using
   the primary e-mail address, else any other e-mail address, else an e-mail account name.
 - The photo replaces the initials (Neos 9) or the user icon (Neos 8) in the user menu of the

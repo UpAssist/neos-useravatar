@@ -12,6 +12,7 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Flow\ResourceManagement\PersistentResource;
 use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Flow\Security\Context as SecurityContext;
 use Neos\Neos\Domain\Model\User;
 use Neos\Neos\Domain\Model\UserPreferences;
 use Neos\Neos\Domain\Service\UserService;
@@ -46,6 +47,9 @@ class UserAvatarService
     protected ResourceManager $resourceManager;
 
     #[Flow\Inject]
+    protected SecurityContext $securityContext;
+
+    #[Flow\Inject]
     protected PersistenceManagerInterface $persistenceManager;
 
     #[Flow\Inject]
@@ -60,9 +64,20 @@ class UserAvatarService
     #[Flow\InjectConfiguration(path: 'gravatar')]
     protected array $gravatarSettings;
 
+    /**
+     * The Neos user of the account that logged in to the Neos backend, or null.
+     *
+     * Not `UserService::getCurrentUser()`: the privilege is granted to every authenticated user, so
+     * an account of another provider (a frontend login) must not get a photo through this package.
+     */
     public function getCurrentUser(): ?User
     {
-        return $this->userService->getCurrentUser();
+        $account = $this->securityContext->getAccountByAuthenticationProviderName('Neos.Neos:Backend');
+        if ($account === null) {
+            return null;
+        }
+
+        return $this->userService->getUser($account->getAccountIdentifier(), 'Neos.Neos:Backend');
     }
 
     public function getUploadedAvatar(User $user): ?PersistentResource

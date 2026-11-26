@@ -88,7 +88,10 @@ class AvatarController extends ActionController
     {
         $this->assertPost();
         $user = $this->userAvatarService->getCurrentUser();
-        if ($user === null || $avatar === null) {
+        if ($user === null) {
+            $this->throwStatus(403);
+        }
+        if ($avatar === null) {
             $this->backToUserSettings('nofile');
         }
         try {
@@ -103,9 +106,10 @@ class AvatarController extends ActionController
     {
         $this->assertPost();
         $user = $this->userAvatarService->getCurrentUser();
-        if ($user !== null) {
-            $this->userAvatarService->removeAvatar($user);
+        if ($user === null) {
+            $this->throwStatus(403);
         }
+        $this->userAvatarService->removeAvatar($user);
         $this->backToUserSettings('removed');
     }
 
